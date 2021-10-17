@@ -15,7 +15,9 @@ function addUsr(req, res, next){
     .then((data) => {
         res.send(data);
     })
-    .catch(err => next);
+    .catch(err => {
+        next(err.errors[0].type);
+    });
 
 }
 
@@ -28,7 +30,8 @@ function findUsrs(req, res, next){
 }
 
 function findUsrById(req, res, next){
-    userFuncs.findById(req.params.id)
+    const {id} = req.params;
+    userFuncs.findById(id)
     .then((data) => {
         res.send(data);
     })

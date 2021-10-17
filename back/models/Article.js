@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
         title: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
             validate:{
                 notEmpty: true
             }
@@ -14,6 +15,11 @@ module.exports = (sequelize, DataTypes) => {
             validate:{
                 notEmpty: true
             }
+        },
+        valide : {
+            type: DataTypes.BOOLEAN, 
+            allowNull: false, 
+            defaultValue: false
         },
         categorie_id: {
             type: DataTypes.INTEGER,

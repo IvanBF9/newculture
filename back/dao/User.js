@@ -30,7 +30,7 @@ async function create(usr){
     return newUser.save();
 }
 
-function findById(){
+function findById(id){
     return User.findByPk(id);
 }
 
@@ -38,13 +38,16 @@ function deleteById(id){
     return User.destroy({ where : {id: id} });
 }
 
-function update(usr, id){
+async function update(usr, id){
+
+    let hash = await bcrypt.hash(usr.pw, await bcrypt.genSalt(10));
+
     let updateUsr = {
         username: usr.username,
         firstname: usr.firstname,
         lastname: usr.lastname,
         email: usr.email,
-        pw: usr.pw,
+        pw: hash,
         level: usr.level,
         admin: usr.admin
     };
