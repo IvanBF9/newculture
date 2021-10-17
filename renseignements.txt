@@ -1,0 +1,28 @@
+-Plateforme d'éducation ouverte
+Plusieurs catégories différentes
+-Histoire
+-Philosophie
+-Politique
+-Art
+
+Plusieurs solutions
+-Articles
+-Débats forum
+-Débats live
+
+Database
+-Users
+-Categories
+-Articles
+-Event
+    Types d'event{
+        -débat
+        -live
+    }
+-Produits
+
+proposition de cours
+
+
+Pour le rendre rentable 
+-Vente d'oeuvres d'art ou d'objets qui suivent l'ethique de notre site web
