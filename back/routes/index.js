@@ -1,7 +1,9 @@
 const {addUsr,findUsrs,findUsrById,updateUsr,deleteById} = require('../controllers/UserController');// User
-
+const {login} = require('../controllers/AuthController');
 const createRoutes = (app) => {
 
+    /*<--- AUTH --->*/
+    app.post('/login', login);
     /*<--- USERS --->*/
     app.post('/user/signin', addUsr);
     app.put('/user/edit/:id', updateUsr);

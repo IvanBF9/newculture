@@ -20,6 +20,9 @@ const db = require('./models');
 db.sequelize.sync().then((req) => {
     //Server On + Port
     app.listen(Port, () => {
-        console.log(`Server listening on http://127.0.0.1:${Port}`);
+        console.log('➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖');
+        console.log('\x1b[36m%s\x1b[0m',`Server listening on http://127.0.0.1:${Port} 😎`);
+        console.log('➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖');
+        console.log('\x1b[36m%s\x1b[0m', `🕒 ${new Date().getHours()}h${new Date().getMinutes()}`);
     });
 });
