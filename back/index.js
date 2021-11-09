@@ -3,25 +3,44 @@ const helmet = require('helmet');
 require('dotenv').config();
 const env = process.env;
 const Port = env.PORT || 8080;
+const {graphqlHTTP} = require("express-graphql");
 
 const app = express();
 
-//Light secure
+//Light secure 
 app.use(helmet());
 app.use(express.json());
 app.disable('x-powered-by');
 
-//Routes
-const createRoutes = require('./routes');
-createRoutes(app);
+//Grahql
+const schema = require('./schemas/public');
+const protectedschema = require('./schemas/protected');
+const {authToken} = require('./auth');
+
+//Opened routes
+app.use("/graphql",
+    graphqlHTTP({
+        schema,
+        graphiql: true,
+    })
+);
+//Protected routes with JWT
+app.use("/graphqlprotected", authToken,
+    graphqlHTTP({
+        schema : protectedschema,
+        rootValue: "ezaeeaz",
+        graphiql: true,
+    })    
+);
+//Moderators routes
+//Admin routes
 
 //Models sequelize & run server
 const db = require('./models');
 db.sequelize.sync().then((req) => {
-    //Server On + Port
     app.listen(Port, () => {
         console.log('➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖');
-        console.log('\x1b[36m%s\x1b[0m',`Server listening on http://127.0.0.1:${Port} 😎`);
+        console.log('\x1b[36m%s\x1b[0m',`Server listening on http://127.0.0.1:${Port} 🙈`);
         console.log('➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖');
         console.log('\x1b[36m%s\x1b[0m', `🕒 ${new Date().getHours()}h${new Date().getMinutes()}`);
     });

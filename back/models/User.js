@@ -58,6 +58,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
+        bearer: {
+            type: DataTypes.TEXT,
+            allowNull: true,
+        },
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
