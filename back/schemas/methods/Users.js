@@ -13,6 +13,7 @@ const {User} = require('../../models');
 const {UserPrivate, UserPublic} = require("../Types/UserType");
 //Function to generate a jwt token to auth our users
 const {generateToken} = require("../../auth");
+const { request, query } = require("express");
 
 /*
  █    ██   ██████ ▓█████  ██▀███    ██████      █████▒█    ██  ███▄    █  ▄████▄    ██████ 
@@ -33,14 +34,18 @@ Publics functions
 const getAllUsers = {
 
     type: new GraphQLList(UserPublic),
-    args: { id: { type: GraphQLInt } },
+    args: {
+        bearer: { type: GraphQLString }, 
+        id: { type: GraphQLInt }
+    },
     resolve(parent, args) {
 
         if(args.id !== undefined){
             //If is find by id
-            return User.findByPk(args.id)
+            return [User.findByPk(args.id)]
         }else{
             //If no id is gived
+            console.log(parent);
             return User.findAll()
         }
 

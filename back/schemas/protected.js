@@ -2,6 +2,7 @@ const graphql = require("graphql");
 const {
     GraphQLObjectType,
     GraphQLSchema,
+    buildSchema
 } = graphql;
 
 //USERS
@@ -28,4 +29,4 @@ const RootQueryProtected = new GraphQLObjectType({
     },
 });
 
-module.exports = new GraphQLSchema({ query: RootQueryProtected });
+module.exports = new GraphQLSchema({ query: RootQueryProtected});

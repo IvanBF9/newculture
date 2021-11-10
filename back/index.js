@@ -24,13 +24,14 @@ app.use("/graphql",
         graphiql: true,
     })
 );
+
 //Protected routes with JWT
 app.use("/graphqlprotected", authToken,
-    graphqlHTTP({
+    graphqlHTTP(async (request, response, graphQLParams) => ({
         schema : protectedschema,
-        rootValue: "ezaeeaz",
+        rootValue : request.headers['authorization'] && request.headers['authorization'].split(' ')[1],
         graphiql: true,
-    })    
+    }))
 );
 //Moderators routes
 //Admin routes
