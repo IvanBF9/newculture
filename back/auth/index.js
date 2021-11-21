@@ -61,10 +61,6 @@ const authToken = async (req, res, next) => {
         jwt.verify(token, secret, (err, user) => {
             if (err) return res.sendStatus(403)
             //Is ok ✅
-            //res.send({bearer: token})
-            //req.bearer = "token";
-            //console.log(req);
-            //req.bearer = "ddedd";
             return next();
         });
 

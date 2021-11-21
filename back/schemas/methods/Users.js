@@ -34,21 +34,32 @@ Publics functions
 const getAllUsers = {
 
     type: new GraphQLList(UserPublic),
+    resolve(parent, args) {
+        return User.findAll()
+    },
+}
+
+//Get user by id
+const getOneUser = {
+    type: new GraphQLList(UserPublic),
     args: {
         bearer: { type: GraphQLString }, 
         id: { type: GraphQLInt }
     },
     resolve(parent, args) {
+        return [User.findByPk(args.id)]
+    },
+}
 
-        if(args.id !== undefined){
-            //If is find by id
-            return [User.findByPk(args.id)]
-        }else{
-            //If no id is gived
-            console.log(parent);
-            return User.findAll()
-        }
-
+//Get my infos
+const getMyProfile = {
+    type: new GraphQLList(UserPublic),
+    args: {
+        bearer: { type: GraphQLString }, 
+        id: { type: GraphQLInt }
+    },
+    resolve(parent, args) {
+        return [User.findByPk(args.id)]
     },
 }
 
@@ -109,4 +120,4 @@ const connect = {
 };
 //You can create a func like logout where you remove user token from db to revoke it 
 
-module.exports = {getAllUsers, createUser, connect};
+module.exports = {getAllUsers, createUser, connect, getOneUser, getMyProfile};

@@ -19,11 +19,12 @@ No auth needed to access to this part
 */
 
 //USERS
-const {getAllUsers, createUser, connect,} = require("./methods/Users");
+const {getAllUsers, createUser, connect} = require("./methods/Users");
 
 const RootQuery = new GraphQLObjectType({
     name: "RootQueryType",
     fields: {
+        //USERS
         getAllUsers: getAllUsers,
     },
 });

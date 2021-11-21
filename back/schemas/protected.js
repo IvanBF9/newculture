@@ -2,11 +2,10 @@ const graphql = require("graphql");
 const {
     GraphQLObjectType,
     GraphQLSchema,
-    buildSchema
 } = graphql;
 
 //USERS
-const {getAllUsers} = require("./methods/Users");
+const {getAllUsers, getOneUser, getMyProfile} = require("./methods/Users");
 
 /*
  ██▓███   ██▀███   ▒█████  ▄▄▄█████▓▓█████  ▄████▄  ▄▄▄█████▓▓█████ ▓█████▄ 
@@ -18,7 +17,7 @@ const {getAllUsers} = require("./methods/Users");
 ░▒ ░       ░▒ ░ ▒░  ░ ▒ ▒░     ░     ░ ░  ░  ░  ▒       ░     ░ ░  ░ ░ ▒  ▒ 
 ░░         ░░   ░ ░ ░ ░ ▒    ░         ░   ░          ░         ░    ░ ░  ░ 
             ░         ░ ░              ░  ░░ ░                  ░  ░   ░    
-                                           ░                         ░      
+                                           ░                         ░
 */
 
 //This route is protected by jwt token
@@ -26,6 +25,8 @@ const RootQueryProtected = new GraphQLObjectType({
     name: "RootQueryType",
     fields: {
         getAllUsers: getAllUsers,
+        getOneUser: getOneUser,
+        getMyProfile: getMyProfile
     },
 });
 

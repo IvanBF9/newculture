@@ -29,12 +29,10 @@ app.use("/graphql",
 app.use("/graphqlprotected", authToken,
     graphqlHTTP(async (request, response, graphQLParams) => ({
         schema : protectedschema,
-        rootValue : request.headers['authorization'] && request.headers['authorization'].split(' ')[1],
+        rootValue : request.headers['authorization'] && request.headers['authorization'].split(' ')[1],//Here we give the torrent to graphql
         graphiql: true,
     }))
 );
-//Moderators routes
-//Admin routes
 
 //Models sequelize & run server
 const db = require('./models');
