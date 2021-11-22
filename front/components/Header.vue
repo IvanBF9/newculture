@@ -15,9 +15,17 @@
         <li><NuxtLink to="/Lives">Lives</NuxtLink></li>
         <li><NuxtLink to="/Produits">Produits</NuxtLink></li>
         <li><NuxtLink to="/Dons">Dons</NuxtLink></li>
+          
       </ul>
-      <div class="ct-hd">
-        <img width="50px" height="50px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" 
+      <div class="ct-hd profile">
+        <div class="dropdown">
+          <p>jeanmicheldu7889</p>
+        <div class="dropdown-content">
+              <div><NuxtLink to="/Donateurs">Profile</NuxtLink></div>
+              <div><NuxtLink to="/Donateurs">Deconnexion</NuxtLink></div>
+          </div>
+        </div>
+        <img class="profile-pic" width="50px" height="50px" src="https://lumiere-a.akamaihd.net/v1/images/ct_belle_upcportalreskin_20694_e5816813.jpeg?region=0,0,330,330" 
         alt="profile">
       </div>
     </nav>
@@ -41,15 +49,12 @@ export default {
 }
 </script>
 
-<style>
-/*General*/
-
-body{
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-  }
+<style scoped>
   /*  Header  */
+  .profile p{
+    margin: 8px;
+    font-size: 1rem;
+  }
   .logo{
     background-image: url("static/logo.png");
     width: 1.5rem;
@@ -113,9 +118,47 @@ body{
   width: 100%; 
   left: 0; 
 }
-/*General*/
-.dp-none{
-  display: none;
-}
-</style>
 
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    color: black;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+
+  .dropdown-content a{
+    text-decoration: none;
+    color: black;
+    font-size: 1.2rem;
+  }
+
+  .dropdown-content div{
+    margin: 8px;
+  }
+
+  .dropdown-content a:hover{
+    text-decoration: none;
+    color: rgb(128, 49, 255);
+
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  .active-nav:after{
+    width: 100% !important; 
+    left: 0 !important;
+  }
+  
+</style>

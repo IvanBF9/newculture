@@ -1,0 +1,21 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.profile-pic{
+    border-radius: 25px;
+    width: 50px;
+    height: 50px;
+}
+.dp-none{
+    display: none;
+}
+.arrow-down {
+    border: solid rgb(255, 255, 255);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg) translateY(-5px);
+    -webkit-transform: rotate(45deg) translateY(-5px);
+}

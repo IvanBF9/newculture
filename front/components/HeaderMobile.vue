@@ -50,14 +50,7 @@ export default {
 }
 </script>
 
-<style>
-/*General*/
-
-body{
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-  }
+<style scoped>
   /*  Header  */
   .logo{
     background-image: url("static/logo.png");
@@ -221,8 +214,6 @@ body{
   .ul-toggle{
     display: grid;
   }
-
-  /*General*/
   .dp-none{
     display: none;
   }
