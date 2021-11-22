@@ -6,34 +6,29 @@
 
 <script>
 export default {
-  //layout: "default", //"default",
   layout({ store }){
     return store.state.layout
   },
-  data() {
-    return {
-    }
-  },
+  /*data({store}) {
+  },*/
   created() {
   },
   destroyed() {
   },
-  mounted({ store }){
-    function setLayout() {
-      if (window.innerWidth > 1280){//PC
-        store.commit('setLayout', 'pc');
-        //this.setLayout(store.state.layout);
-      }else{
-       // store.commit('setLayout', 'default');
-        //this.setLayout(store.state.layout);
-      }
-    }
-   // window.addEventListener('resize', this.selectLayout);
-   // this.selectLayout();
-    window.addEventListener('resize', setLayout);
-    setLayout();
+  mounted(){
+    window.addEventListener('resize', this.selectHeader);
+    this.selectHeader();
   },
   methods: {
+    selectHeader(){
+       if (window.innerWidth > 1280){//PC
+        this.$store.commit("setLayout", "pc")
+
+       }else{
+         this.$store.commit("setLayout", "default");
+       }
+       $nuxt.setLayout(this.$store.state.layout)
+    }
   }
 }
 </script>
