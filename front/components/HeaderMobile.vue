@@ -9,7 +9,12 @@
       </div>
       <ul class="mobile-ul">
         <li><NuxtLink to="/">Accueil</NuxtLink></li>
-        <li><NuxtLink to="/Articles">Articles</NuxtLink></li>
+        <li id="drop-articles"><a>Articles</a></li>
+        <div class="dropdown-articles dp-none">
+          <li><NuxtLink to="/Articles">Cate 1</NuxtLink></li>
+          <li><NuxtLink to="/Articles">Cate 2</NuxtLink></li>
+          <li><NuxtLink to="/Articles">Cate 3</NuxtLink></li>
+        </div>
         <li><NuxtLink to="/Evenements">Evénements</NuxtLink></li>
         <li><NuxtLink to="/Lives">Lives</NuxtLink></li>
         <li><NuxtLink to="/Produits">Produits</NuxtLink></li>
@@ -36,6 +41,11 @@ export default {
     document.querySelector(".hamburger").removeEventListener('click', this.menuClick);
   },
   mounted() {
+    //a modifier vori meilleure methode ...
+    document.querySelector('#drop-articles').addEventListener("click", function open(){
+      document.querySelector(".dropdown-articles").classList.toggle("dp-none");
+    });
+
     document.querySelector(".hamburger").addEventListener("click", this.menuClick);
 
     
@@ -51,6 +61,9 @@ export default {
 </script>
 
 <style scoped>
+  .dropdown-articles{
+    margin-left: 32px;
+  }
   /*  Header  */
   .logo{
     background-image: url("static/logo.png");
@@ -189,6 +202,7 @@ export default {
   display: inline-block;
   padding: 15px 20px;
   position: relative;
+  cursor: pointer;
 }
 .header ul li a:after {    
   background: none repeat scroll 0 0 transparent;
