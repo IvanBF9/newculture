@@ -17,11 +17,16 @@ body{
 
 /*General for header*/
 .ct-hd {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     display: flex;
     padding: 8px;
     padding-right: 16px;
     align-items: center;
+  }
+  .ct-hd a {
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
   }
   .header-nav ul li {
     width: 100%;

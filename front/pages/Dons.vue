@@ -1,19 +1,13 @@
 <template>
 <div class="app">
-
- <h1>Articles page {{categorie}}</h1>
+  <h1>Page Dons</h1>
 </div>
 </template>
 
 <script>
 export default {
   layout({ store }){
-    return store.state.articlesLayout
-  },
-  asyncData ({ params }) {
-    return {
-      categorie: params.categorie
-    }
+    return store.state.layout
   },
   /*data({store}) {
   },*/
@@ -28,15 +22,16 @@ export default {
   methods: {
     selectHeader(){
     if (window.innerWidth > 1079){//PC
-      this.$store.commit("setArticlesLayout", "articlespc")
+      this.$store.commit("setLayout", "pc")
     }else{
-      this.$store.commit("setArticlesLayout", "default");
+      this.$store.commit("setLayout", "default");
     }
-    $nuxt.setLayout(this.$store.state.articlesLayout)
+    $nuxt.setLayout(this.$store.state.layout)
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
+
 </style>

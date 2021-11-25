@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     selectHeader(){
-    if (window.innerWidth > 1280){//PC
+    if (window.innerWidth > 1079){//PC
       this.$store.commit("setLayout", "pc")
     }else{
       this.$store.commit("setLayout", "default");

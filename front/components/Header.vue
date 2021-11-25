@@ -3,19 +3,18 @@
     <!--NAV PC-->
     <nav class="header-nav">
       <div class="ct-hd">
-        NeoCulture
-        <div class="logo">
-
-        </div>
+        <NuxtLink to="/">
+          NeoCulture
+          <img width="1.4rem" height="1.4rem" class="logo-header" src="/logo.png" alt="neo culture logo">
+        </NuxtLink>
       </div>
       <ul>
-        <li><NuxtLink to="/">Accueil</NuxtLink></li>
         <li><NuxtLink to="/Articles">Articles</NuxtLink></li>
         <li><NuxtLink to="/Evenements">Evénements</NuxtLink></li>
         <li><NuxtLink to="/Lives">Lives</NuxtLink></li>
         <li><NuxtLink to="/Produits">Produits</NuxtLink></li>
+        <li><NuxtLink to="/Creation">Création</NuxtLink></li>
         <li><NuxtLink to="/Dons">Dons</NuxtLink></li>
-          
       </ul>
       <div class="ct-hd profile">
         <div class="dropdown">
@@ -25,8 +24,7 @@
               <div><NuxtLink to="/Donateurs">Deconnexion</NuxtLink></div>
           </div>
         </div>
-        <img width="50px" height="50px" src="https://lumiere-a.akamaihd.net/v1/images/ct_belle_upcportalreskin_20694_e5816813.jpeg?region=0,0,330,330" 
-        alt="profile">
+        <img width="50px" height="50px" src="https://lumiere-a.akamaihd.net/v1/images/ct_belle_upcportalreskin_20694_e5816813.jpeg?region=0,0,330,330" alt="profile">
       </div>
     </nav>
   </header>
@@ -59,7 +57,12 @@ export default {
     border-radius: 25px;
     width: 50px;
     height: 50px;
-}
+  }
+  .logo-header{
+    width: 1.4rem;
+    height: 1.4rem;
+    vertical-align: middle;
+  }
   .logo{
     background-image: url("static/logo.png");
     width: 1.5rem;
@@ -120,6 +123,18 @@ export default {
   .active-nav:after{
     width: 100% !important; 
     left: 0 !important;
+  }
+
+  @media (max-width: 1439px) {
+    .header-nav ul li a {
+      padding: 15px 8px;
+    }
+  }
+
+  @media (max-width: 1279px) {
+    .header-nav ul li a {
+      padding: 15px 4px;
+    }
   }
   
 </style>

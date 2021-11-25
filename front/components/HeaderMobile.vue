@@ -3,9 +3,10 @@
     <!--NAV Mobile-->
     <div class="header">
       <div class="ct-hd">
-        NeoCulture
-        <div class="logo">
-        </div>
+        <NuxtLink to="/">
+          NeoCulture
+          <img width="1.4rem" height="1.4rem" class="logo-header" src="/logo.png" alt="neo culture logo">
+        </NuxtLink>
       </div>
       <button class="hamburger hamburger--slider" type="button">
         <span class="hamburger-box">
@@ -15,7 +16,6 @@
     </div>
     <nav class="header-nav">
       <ul>
-        <li><NuxtLink to="/">Accueil</NuxtLink></li>
         <li id="drop-articles"><a>Articles</a> <div class="triangle"></div></li>
         <div class="dropdown-articles">
           <li><NuxtLink to="/Articles/Cate1">Cate 1</NuxtLink></li>
@@ -25,6 +25,7 @@
         <li><NuxtLink to="/Evenements">Evénements</NuxtLink></li>
         <li><NuxtLink to="/Lives">Lives</NuxtLink></li>
         <li><NuxtLink to="/Produits">Produits</NuxtLink></li>
+        <li><NuxtLink to="/Creation">Création</NuxtLink></li>
         <li><NuxtLink to="/Dons">Dons</NuxtLink></li>
         <!--a Retaffer-->
         <li ><NuxtLink to="/Dons">JeanMichel</NuxtLink><img width="40px" height="40px" src="https://lumiere-a.akamaihd.net/v1/images/ct_belle_upcportalreskin_20694_e5816813.jpeg?region=0,0,330,330" alt="profile"></li>
@@ -41,6 +42,12 @@ export default {
     }
   },
   created() {
+  },
+  watch: {
+    $route() {
+      console.log("change route");
+      this.removeActiveHeader()
+    },
   },
   destroyed() {
     document.querySelector(".hamburger").removeEventListener('click', this.menuClick);
@@ -60,6 +67,13 @@ export default {
       dropArticlesCategorie(){
         document.querySelector(".dropdown-articles").classList.toggle("toggled");
         document.querySelector('#drop-articles').children[1].classList.toggle("rotate");
+      },
+      removeActiveHeader(){
+        console.log("Removing active header")
+        if(document.querySelector(".hamburger").classList.contains("is-active")){
+          document.querySelector(".hamburger").classList.remove("is-active");
+          document.querySelector(".header-nav").classList.remove("toggled");
+        }
       }
   }
 }
@@ -71,6 +85,11 @@ export default {
     width: 40px;
     height: 40px;
     border-radius: 20px;
+  }
+  .logo-header{
+    width: 1.4rem;
+    height: 1.4rem;
+    vertical-align: middle;
   }
   .header{
     display: flex;
@@ -95,8 +114,8 @@ export default {
     background-repeat: no-repeat;
   }
   .header-nav{
-    -webkit-transition: max-height 200ms cubic-bezier(1, 0, 1, 0);
-    transition: max-height 200ms cubic-bezier(1, 0, 1, 0);
+    -webkit-transition: max-height 200ms cubic-bezier(0.38, -0.03, 0.74, 1.1);
+    transition: max-height 200ms cubic-bezier(0.38, -0.03, 0.74, 1.1);
     background: rgb(46,42,38);
     background: linear-gradient(0deg, rgba(46,42,38,1) 50%, rgba(28,26,25,1) 100%);
     overflow: hidden;
@@ -181,11 +200,9 @@ export default {
     -webkit-transition: transform 200ms cubic-bezier(1, 0, 1, 0);
     transition: transform 200ms cubic-bezier(1, 0, 1, 0);
   }
-
   .rotate{
     transform: rotate(180deg);
   }
-
   .toggled{
     max-height: 2000px;
   }

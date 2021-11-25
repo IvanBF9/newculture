@@ -1,6 +1,6 @@
 export const state = () => ({
     layout: "default",
-    articlesLayout: "articlespc"
+    articlesLayout: "default"
 })
 
 export const mutations = {
