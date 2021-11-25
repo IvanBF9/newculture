@@ -1,12 +1,12 @@
 <template>
     <nav>
       <ul>
-        <li><NuxtLink to="/Dons">Tous</NuxtLink></li>
-        <li><NuxtLink to="/">Art</NuxtLink></li>
-        <li><NuxtLink to="/Articles">Philosophie</NuxtLink></li>
-        <li><NuxtLink to="/Evenements">Histoire</NuxtLink></li>
-        <li><NuxtLink to="/Lives">Sociologie</NuxtLink></li>
-        <li><NuxtLink to="/Produits">Actualité</NuxtLink></li>
+        <li><NuxtLink to="/Articles">Tous</NuxtLink></li>
+        <li><NuxtLink to="/Articles/Art">Art</NuxtLink></li>
+        <li><NuxtLink to="/Articles/Philosophie">Philosophie</NuxtLink></li>
+        <li><NuxtLink to="/Articles/Histoire">Histoire</NuxtLink></li>
+        <li><NuxtLink to="/Articles/Sociologie">Sociologie</NuxtLink></li>
+        <li><NuxtLink to="/Articles/Actualité">Actualité</NuxtLink></li>
       </ul>
     </nav>
 </template>

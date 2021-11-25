@@ -3,11 +3,6 @@ body{
     padding: 0;
     font-family: sans-serif;
 }
-.profile-pic{
-    border-radius: 25px;
-    width: 50px;
-    height: 50px;
-}
 .dp-none{
     display: none;
 }
@@ -19,3 +14,47 @@ body{
     transform: rotate(45deg) translateY(-5px);
     -webkit-transform: rotate(45deg) translateY(-5px);
 }
+
+/*General for header*/
+.ct-hd {
+    font-size: 1.5rem;
+    display: flex;
+    padding: 8px;
+    padding-right: 16px;
+    align-items: center;
+  }
+  .header-nav ul li {
+    width: 100%;
+    display: flex;
+    list-style: none;
+    padding: 8px;
+    align-items: center;
+  }
+
+  .header-nav ul li a {
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    
+    display: inline-block;
+    padding: 15px 20px;
+    position: relative;
+    cursor: pointer;
+  }
+  .header-nav ul li a:after {    
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: rgb(128, 49, 255);
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+  }
+  .header-nav ul li a:hover:after { 
+    width: 100%; 
+    left: 0; 
+  }
