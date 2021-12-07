@@ -13,7 +13,6 @@ const {User} = require('../../models');
 const {UserPrivate, UserPublic} = require("../Types/UserType");
 //Function to generate a jwt token to auth our users
 const {generateToken} = require("../../auth");
-const { request, query } = require("express");
 
 /*
  █    ██   ██████ ▓█████  ██▀███    ██████      █████▒█    ██  ███▄    █  ▄████▄    ██████ 

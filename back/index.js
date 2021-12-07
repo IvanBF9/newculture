@@ -4,6 +4,7 @@ require('dotenv').config();
 const env = process.env;
 const Port = env.PORT || 8080;
 const {graphqlHTTP} = require("express-graphql");
+const cors = require("cors");
 
 const app = express();
 
@@ -11,6 +12,13 @@ const app = express();
 app.use(helmet());
 app.use(express.json());
 app.disable('x-powered-by');
+
+//cors
+const corsOptions = {
+    origin: '*',
+}
+
+app.use(cors(corsOptions));
 
 //Grahql
 const schema = require('./schemas/public');

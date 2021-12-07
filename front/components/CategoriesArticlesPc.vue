@@ -2,19 +2,30 @@
     <nav>
       <ul>
         <li><NuxtLink to="/Articles">Tous</NuxtLink></li>
+        <li v-for="categorie in getCategoriesArticles" v-bind:key="categorie.id"><NuxtLink v-bind:to="`/Articles/${categorie.name}`">{{categorie.name}}</NuxtLink></li>
+       <!-- <li><NuxtLink to="/Articles">Tous</NuxtLink></li>
         <li><NuxtLink to="/Articles/Art">Art</NuxtLink></li>
         <li><NuxtLink to="/Articles/Philosophie">Philosophie</NuxtLink></li>
         <li><NuxtLink to="/Articles/Histoire">Histoire</NuxtLink></li>
         <li><NuxtLink to="/Articles/Sociologie">Sociologie</NuxtLink></li>
-        <li><NuxtLink to="/Articles/Actualité">Actualité</NuxtLink></li>
+        <li><NuxtLink to="/Articles/Actualité">Actualité</NuxtLink></li>-->
       </ul>
     </nav>
 </template>
 
 <script>
+import {categoriesArticles} from '~/graphql/query'
+
 export default {
   data() {
     return {
+      getCategoriesArticles:[]
+    }
+  },
+  apollo:{
+    getCategoriesArticles:{
+      prefetch: true,
+      query: categoriesArticles
     }
   },
   created() {

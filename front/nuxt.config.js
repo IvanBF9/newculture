@@ -19,7 +19,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     // CSS file in the project
-    '@/assets/css/main.css',
+    '@/assets/css/quill.min.css',
     // SCSS file in the project
     '@/assets/css/main.scss'
   ],
@@ -34,11 +34,20 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/style-resources'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/apollo',
   ],
+  apollo: {
+    clientConfigs: { 
+      default: {
+        httpEndpoint: "http://localhost:3000/graphql"
+      }
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

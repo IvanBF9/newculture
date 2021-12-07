@@ -1,7 +1,7 @@
 <template>
 <div class="app">
-
- <h1>Articles page {{categorie}}</h1>
+  <h1 v-if="categorie == undefined" class="title-page">Tous les Articles</h1>
+  <h1 v-else class="title-page">Articles {{categorie}}</h1>
 </div>
 </template>
 
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     selectHeader(){
-    if (window.innerWidth > 1079){//PC
+    if (window.innerWidth > 1124){//PC
       this.$store.commit("setArticlesLayout", "articlespc")
     }else{
       this.$store.commit("setArticlesLayout", "default");

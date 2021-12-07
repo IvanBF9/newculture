@@ -2,7 +2,15 @@ module.exports = (sequelize, DataTypes) => {
     const Article = sequelize.define('Article', {
         
         title: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(65),
+            allowNull: false,
+            unique: true,
+            validate:{
+                notEmpty: true
+            }
+        },
+        description: {
+            type: DataTypes.STRING(160),
             allowNull: false,
             unique: true,
             validate:{
@@ -10,13 +18,18 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         content: {
-            type: DataTypes.JSON,
+            type: DataTypes.TEXT,
             allowNull: false,
             validate:{
                 notEmpty: true
             }
         },
         valide : {
+            type: DataTypes.BOOLEAN, 
+            allowNull: false, 
+            defaultValue: false
+        },
+        edite_await : {
             type: DataTypes.BOOLEAN, 
             allowNull: false, 
             defaultValue: false

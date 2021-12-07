@@ -1,14 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Product = sequelize.define('Product', {
 
-        categorie_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'CategorieProducts',
-                key: 'id'
-            },
-            allowNull: false,
-        },
         img_id_1: {
             type: DataTypes.INTEGER,
             references: {
@@ -61,6 +53,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         delivery: {
             type: DataTypes.STRING,
+            allowNull: false,
+            validate:{
+                notEmpty: true
+            }
+        },
+        delivery_price: {
+            type: DataTypes.DECIMAL(15,2),
             allowNull: false,
             validate:{
                 notEmpty: true

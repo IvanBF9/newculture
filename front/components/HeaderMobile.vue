@@ -18,9 +18,8 @@
       <ul>
         <li id="drop-articles"><a>Articles</a> <div class="triangle"></div></li>
         <div class="dropdown-articles">
-          <li><NuxtLink to="/Articles/Cate1">Cate 1</NuxtLink></li>
-          <li><NuxtLink to="/Articles/Cate2">Cate 2</NuxtLink></li>
-          <li><NuxtLink to="/Articles/Cate3">Cate 3</NuxtLink></li>
+          <li><NuxtLink to="/Articles">Tous</NuxtLink></li>
+          <li v-for="categorie in getCategoriesArticles" v-bind:key="categorie.id"><NuxtLink v-bind:to="`/Articles/${categorie.name}`">{{categorie.name}}</NuxtLink></li>
         </div>
         <li><NuxtLink to="/Evenements">Evénements</NuxtLink></li>
         <li><NuxtLink to="/Lives">Lives</NuxtLink></li>
@@ -36,9 +35,18 @@
 </template>
 
 <script>
+import {categoriesArticles} from '~/graphql/query'
+
 export default {
   data() {
     return {
+      getCategoriesArticles:[]
+    }
+  },
+  apollo:{
+    getCategoriesArticles:{
+      prefetch: true,
+      query: categoriesArticles
     }
   },
   created() {

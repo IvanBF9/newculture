@@ -1,29 +1,30 @@
 <template>
 <div class="app">
-
- <h1>Articles id</h1>
+  <h1 class="title-page">Création d'article</h1>
+  <ArticleForm />
 </div>
 </template>
 
 <script>
 export default {
+  head () {
+    return {
+      title: "Création d'article", // Other meta information
+      script: [
+        { hid: 'quill', src: 'quill.min.js', defer: true }
+      ]
+    }
+  },
   layout({ store }){
     return store.state.layout
   },
   /*data({store}) {
   },*/
-  asyncData ({ params }) {
-    return {
-      id: params.id
-    }
-  },
   created() {
   },
   destroyed() {
   },
   mounted(){
-    console.log(this.id);
-
     window.addEventListener('resize', this.selectHeader);
     this.selectHeader();
   },
@@ -40,5 +41,5 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 </style>
