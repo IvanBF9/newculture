@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  middleware: 'auth',
   layout({ store }){
     return store.state.articlesLayout
   },

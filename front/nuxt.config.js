@@ -40,11 +40,32 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/apollo',
+    '@nuxtjs/auth',
   ],
   apollo: {
     clientConfigs: { 
       default: {
         httpEndpoint: "http://localhost:3000/graphql"
+      }
+    }
+  },
+  //Middleware !
+  auth: {
+    localStorage: false,
+    cookie: {
+      prefix: 'auth.',
+      options: {
+        path: '/',
+        maxAge: 10800
+      }
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          Connexion: { url: 'Connexion', method: 'post', propertyName: 'access_token' },
+          user: { url: 'me', method: 'get', propertyName: 'content' },
+          logout: false
+        }
       }
     }
   },
