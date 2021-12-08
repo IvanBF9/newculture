@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  middleware: 'auth',
+  middleware: ['redirectIfAuth'],
   layout({ store }){
     return store.state.articlesLayout
   },
