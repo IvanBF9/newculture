@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import {registerMutation} from '~/graphql/query'
+
 export default {
   layout({ store }){
     return store.state.layout
@@ -60,28 +62,58 @@ export default {
     window.addEventListener('resize', this.selectHeader);
     this.selectHeader();
 
-    let inputFile = document.querySelector('#profile-picture');
-
-    inputFile.addEventListener('change', function () {
+    //change image 
+    function changeImg() {
+        let inputFile = document.querySelector('#profile-picture');
         var reader = new FileReader();
         reader.readAsDataURL(inputFile.files[0]);
-        reader.onload =  function({target}){
-            console.log('DataURL:', target.result);
+        reader.onload = function ({target}){
             document.querySelector('.pp-preview').src = target.result;
+            console.log(document.querySelector('.pp-preview').src)
         };
-        //document.querySelector('.pp-preview').src = reader;
-        console.log('Done');
+    }
+    document.querySelector('#profile-picture').addEventListener('change', changeImg);
+
+    //Register part
+    document.querySelector('.btn-first').addEventListener('click', () => {
+        let newUser = {
+            username: document.querySelector('#username').value,
+            firstname: document.querySelector('#prenom').value,
+            lastname: document.querySelector('#nom').value,
+            email: document.querySelector('#email').value,
+            pw: document.querySelector('#pw').value,
+            profile_picture: document.querySelector('.pp-preview').src,
+        };
+
+        this.registerUser(newUser)
     });
   },
   methods: {
     selectHeader(){
-    if (window.innerWidth > 1124){//PC
-      this.$store.commit("setLayout", "pc")
-    }else{
-      this.$store.commit("setLayout", "default");
-    }
-    $nuxt.setLayout(this.$store.state.layout)
-    }
+        if (window.innerWidth > 1124){//PC
+            this.$store.commit("setLayout", "pc")
+        }else{
+            this.$store.commit("setLayout", "default");
+        }
+        $nuxt.setLayout(this.$store.state.layout)
+    },
+    registerUser ({username, firstname, lastname, email, pw, profile_picture}) {
+      this.$apollo.mutate({
+        mutation: registerMutation,
+        variables: {
+          username,
+          firstname,
+          lastname,
+          email,
+          pw,
+          profile_picture
+        }
+      })
+      .then(data => {
+          //do thomething here
+          console.log(data)
+      })
+    },
   }
 }
 </script>

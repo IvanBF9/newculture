@@ -17,7 +17,7 @@ const UserPrivate = new GraphQLObjectType({
     name: "User",
     fields: () => ({
         id: { type: GraphQLInt },
-        profile_picture: { type: GraphQLInt },
+        profile_picture: { type: GraphQLString },
         username: { type: GraphQLString },
         firstname: { type: GraphQLString },
         lastname: { type: GraphQLString },
@@ -36,7 +36,7 @@ const UserPublic = new GraphQLObjectType({
     name: "UserSearch",
     fields: () => ({
         id: { type: GraphQLInt },
-        profile_picture: { type: GraphQLInt },
+        profile_picture: { type: GraphQLString },
         username: { type: GraphQLString },
         bearer: { type: GraphQLString },
         level: { type: GraphQLString },

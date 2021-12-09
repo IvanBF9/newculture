@@ -10,11 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             }
         },
         profile_picture: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Images',
-                key: 'id'
-            },
+            type: DataTypes.BLOB,
             allowNull: true,
         },
         firstname: {

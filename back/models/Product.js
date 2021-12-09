@@ -2,28 +2,25 @@ module.exports = (sequelize, DataTypes) => {
     const Product = sequelize.define('Product', {
 
         img_id_1: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Images',
-                key: 'id'
-            },
-            allowNull: false,
+            type: DataTypes.BLOB,
+            allowNull: true,
+            validate:{
+                notEmpty: false
+            }
         },
         img_id_2: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Images',
-                key: 'id'
-            },
+            type: DataTypes.BLOB,
             allowNull: true,
+            validate:{
+                notEmpty: false
+            }
         },
         img_id_3: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Images',
-                key: 'id'
-            },
+            type: DataTypes.BLOB,
             allowNull: true,
+            validate:{
+                notEmpty: false
+            }
         },
         title: {
             type: DataTypes.STRING,

@@ -33,8 +33,13 @@ Publics functions
 const getAllUsers = {
 
     type: new GraphQLList(UserPublic),
-    resolve(parent, args) {
-        return User.findAll()
+    async resolve(parent, args) {
+        let user = await User.findAll();
+        user.map(usr => {
+            //In GraphQL 
+            usr.profile_picture = usr.profile_picture.toString(); 
+        });
+        return user//User.findAll()
     },
 }
 
@@ -70,7 +75,7 @@ Privates functions
 const createUser = {
     type: UserPrivate,
     args: {
-        profile_picture: { type: GraphQLInt },
+        profile_picture: { type: GraphQLString },
         username: { type: GraphQLString },
         firstname: { type: GraphQLString },
         lastname: { type: GraphQLString },
