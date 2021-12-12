@@ -1,5 +1,6 @@
 const graphql = require("graphql");
 const bcrypt = require('bcrypt');
+const jwt_decode = require('jwt-decode');
 const {
     GraphQLSchema,
     GraphQLInt,
@@ -58,12 +59,18 @@ const getOneUser = {
 //Get my infos
 const getMyProfile = {
     type: new GraphQLList(UserPublic),
-    args: {
-        bearer: { type: GraphQLString }, 
-        id: { type: GraphQLInt }
-    },
-    resolve(parent, args) {
-        return [User.findByPk(args.id)]
+    async resolve(parent, args) {
+
+        try{
+            console.log(jwt_decode(parent));
+            let {id} = jwt_decode(parent);
+            let usr = await User.findByPk(id);
+            usr.profile_picture = usr.profile_picture.toString();
+            return [usr];
+
+        }catch(e){
+            console.log(e);
+        }
     },
 }
 

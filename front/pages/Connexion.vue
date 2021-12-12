@@ -19,10 +19,21 @@
 </template>
 
 <script>
+import {connectUserMutation} from '~/graphql/query'
+
 export default {
+  middleware:["checkState"],
   layout({ store }){
     return store.state.layout
   },
+  //Seting the route to use with graphql query
+  apollo: {
+    //$client: 'protectedRoute',
+  },
+
+  //This apollo thing works great ! :)
+
+
   /*data({store}) {
   },*/
   created() {
@@ -30,18 +41,41 @@ export default {
   destroyed() {
   },
   mounted(){
-    window.addEventListener('resize', this.selectHeader);
-    this.selectHeader();
+
+    //Login
+    document.querySelector('.btn-first').addEventListener('click', () => {
+      let user = {
+        email: document.querySelector('#email').value,
+        pw: document.querySelector('#pw').value,
+      }
+      this.logIn(user)
+    })
+
   },
   methods: {
-    selectHeader(){
-    if (window.innerWidth > 1124){//PC
-      this.$store.commit("setLayout", "pc")
-    }else{
-      this.$store.commit("setLayout", "default");
-    }
-    $nuxt.setLayout(this.$store.state.layout)
-    }
+    logIn ({email, pw}) {
+      this.$apollo.mutate({
+        mutation: connectUserMutation,
+        variables: {
+          email,
+          pw,
+        }
+      })
+      .then(data => {
+        this.$cookiz.set('bearer', data.data.connect.bearer, {
+          path: '/',
+          maxAge: 60 * 60 * 24 * 7
+        })
+
+        this.$store.commit("setHeaderKey", (this.$store.state.headerkey + 1));        
+        this.$router.push('/');
+
+        
+      })
+      .catch(err => {
+        console.log(`Erreur d'auth ! : ${err}`);
+      })
+    },
   }
 }
 </script>

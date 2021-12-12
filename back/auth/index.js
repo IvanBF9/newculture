@@ -24,11 +24,10 @@ This function returns a new token for the user
 and store the token on db to revoke old tokens
 */
 const generateToken = async (user) => {
-    let {username, profile_picture, email, rights_level, id} = user;
+    let {username, email, rights_level, id} = user;
     //This Token expires in 14 days
     const token = jwt.sign({
         username,
-        profile_picture,
         email,
         rights_level,
         id
@@ -47,6 +46,7 @@ This function check the token validity
 const authToken = async (req, res, next) => {
     //Getting the tokens on the header
     const authHeader = req.headers['authorization'];
+    console.log(req.headers);
     const token = authHeader && authHeader.split(' ')[1];
     //Status 401 = Unauthorised "token is undefined" 🚷
     if (token == null) return res.sendStatus(401);

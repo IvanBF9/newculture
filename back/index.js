@@ -18,7 +18,7 @@ const corsOptions = {
     origin: '*',
 }
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 //Grahql
 const schema = require('./schemas/public');
@@ -37,7 +37,7 @@ app.use("/graphql",
 app.use("/graphqlprotected", authToken,
     graphqlHTTP(async (request, response, graphQLParams) => ({
         schema : protectedschema,
-        rootValue : request.headers['authorization'] && request.headers['authorization'].split(' ')[1],//Here we give the torrent to graphql
+        rootValue : request.headers['authorization'] && request.headers['authorization'].split(' ')[1],//Here we give the token to graphql
         graphiql: true,
     }))
 );

@@ -16,15 +16,19 @@
         <li><NuxtLink to="/Creation">Création</NuxtLink></li>
         <li><NuxtLink to="/Dons">Dons</NuxtLink></li>
       </ul>
-      <div class="ct-hd profile">
+      <div v-if="auth" class="ct-hd profile">
         <div class="dropdown">
-          <p>jeanmicheldu7889</p>
+          <p>{{username}}</p>
         <div class="dropdown-content">
               <div><NuxtLink to="/Donateurs">Profile</NuxtLink></div>
-              <div><NuxtLink to="/Donateurs">Deconnexion</NuxtLink></div>
+              <div><NuxtLink to="/deconnexion">Deconnexion</NuxtLink></div>
           </div>
         </div>
-        <img width="50px" height="50px" src="https://lumiere-a.akamaihd.net/v1/images/ct_belle_upcportalreskin_20694_e5816813.jpeg?region=0,0,330,330" alt="profile">
+        <img width="50px" height="50px" v-bind:src="profilepicture" v-bind:alt="username">
+      </div>
+      <div v-else class="log-in">
+        <NuxtLink to="/connexion">Connexion</NuxtLink>
+        <NuxtLink to="/inscription">Inscription</NuxtLink>
       </div>
     </nav>
   </header>
@@ -34,6 +38,9 @@
 export default {
   data() {
     return {
+      auth: this.$store.state.auth,
+      username: this.$store.state.username,
+      profilepicture: this.$store.state.profilepicture
     }
   },
   created() {
@@ -123,6 +130,26 @@ export default {
   .active-nav:after{
     width: 100% !important; 
     left: 0 !important;
+  }
+
+  .log-in{
+    display: flex;
+    justify-content: end;
+    text-align: center;
+    vertical-align: middle;
+    width: 210px;
+  }
+  .log-in a{
+    margin: 0 8px;
+    padding-top: 23px;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+
+  .log-in a:hover{
+    color: rgb(128, 49, 255);
   }
 
   @media (max-width: 1439px) {

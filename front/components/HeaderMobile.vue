@@ -27,8 +27,12 @@
         <li><NuxtLink to="/Creation">Création</NuxtLink></li>
         <li><NuxtLink to="/Dons">Dons</NuxtLink></li>
         <!--a Retaffer-->
-        <li ><NuxtLink to="/Dons">JeanMichel</NuxtLink><img width="40px" height="40px" src="https://lumiere-a.akamaihd.net/v1/images/ct_belle_upcportalreskin_20694_e5816813.jpeg?region=0,0,330,330" alt="profile"></li>
-        <li><NuxtLink to="/Dons">Deconnexion</NuxtLink></li>
+        
+        <li v-if="auth == true"><NuxtLink to="/Dons">{{username}}</NuxtLink><img width="40px" height="40px" v-bind:src="profilepicture" v-bind:alt="username" ></li>
+        <li v-if="auth == true"><NuxtLink to="/deconnexion">Deconnexion</NuxtLink></li>
+       
+        <li v-if="auth == false"><NuxtLink to="/connexion">Connexion</NuxtLink></li>
+        <li v-if="auth == false"><NuxtLink to="/inscription">Inscription</NuxtLink></li>
       </ul>
     </nav>
   </header>
@@ -40,7 +44,10 @@ import {categoriesArticles} from '~/graphql/query'
 export default {
   data() {
     return {
-      getCategoriesArticles:[]
+      getCategoriesArticles:[],
+      auth: this.$store.state.auth,
+      username: this.$store.state.username,
+      profilepicture: this.$store.state.profilepicture
     }
   },
   apollo:{
@@ -57,10 +64,6 @@ export default {
       this.removeActiveHeader()
     },
   },
-  destroyed() {
-    document.querySelector(".hamburger").removeEventListener('click', this.menuClick);
-    document.querySelector('#drop-articles').removeEventListener("click", this.dropArticlesCategorie);
-  },
   mounted() {
     //Toggle dropdown articles
     document.querySelector('#drop-articles').addEventListener("click", this.dropArticlesCategorie);
@@ -68,6 +71,9 @@ export default {
     document.querySelector(".hamburger").addEventListener("click", this.menuClick);
   },
   methods: {
+      col () {
+        console.log("aaaa")
+      },
       menuClick(){
         document.querySelector(".hamburger").classList.toggle("is-active");
         document.querySelector(".header-nav").classList.toggle("toggled");

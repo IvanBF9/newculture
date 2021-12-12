@@ -19,8 +19,7 @@ mutation createArticleMutation($title: String!, $description: String!, $content:
 `
 
 //USERS
-//create account
-
+//Register query
 export const registerMutation = gql`
 mutation registerMutation($username: String!, $firstname: String!, $lastname: String!, $email: String!, $pw: String!, $profile_picture: String!){
     createUser(
@@ -32,6 +31,27 @@ mutation registerMutation($username: String!, $firstname: String!, $lastname: St
             profile_picture: $profile_picture
         ){
             username
+    }
+}
+`
+//Log in query
+export const connectUserMutation = gql`
+mutation connectUserMutation($email: String!, $pw: String!){
+    connect(
+        email: $email,
+        pw: $pw,
+    ){
+        bearer
+    }
+}
+`
+
+//get profile user with bearer
+export const getUserWithBearer = gql`
+query{
+    getMyProfile{
+        username,
+        profile_picture,
     }
 }
 `

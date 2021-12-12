@@ -1,5 +1,9 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+
+  server: {
+    port: 8039, // default: 3000
+  },
   head: {
     title: 'front',
     htmlAttrs: {
@@ -40,11 +44,15 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/apollo',
+    ['cookie-universal-nuxt', { alias: 'cookiz' }],
   ],
   apollo: {
     clientConfigs: { 
       default: {
         httpEndpoint: "http://localhost:3000/graphql"
+      },
+      protectedRoute: {
+        httpEndpoint: "http://localhost:3000/graphqlprotected",
       }
     }
   },

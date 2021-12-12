@@ -49,9 +49,6 @@
 import {registerMutation} from '~/graphql/query'
 
 export default {
-  layout({ store }){
-    return store.state.layout
-  },
   /*data({store}) {
   },*/
   created() {
@@ -59,8 +56,6 @@ export default {
   destroyed() {
   },
   mounted(){
-    window.addEventListener('resize', this.selectHeader);
-    this.selectHeader();
 
     //change image 
     function changeImg() {
@@ -73,7 +68,6 @@ export default {
         };
     }
     document.querySelector('#profile-picture').addEventListener('change', changeImg);
-
     //Register part
     document.querySelector('.btn-first').addEventListener('click', () => {
         let newUser = {
@@ -89,14 +83,6 @@ export default {
     });
   },
   methods: {
-    selectHeader(){
-        if (window.innerWidth > 1124){//PC
-            this.$store.commit("setLayout", "pc")
-        }else{
-            this.$store.commit("setLayout", "default");
-        }
-        $nuxt.setLayout(this.$store.state.layout)
-    },
     registerUser ({username, firstname, lastname, email, pw, profile_picture}) {
       this.$apollo.mutate({
         mutation: registerMutation,
