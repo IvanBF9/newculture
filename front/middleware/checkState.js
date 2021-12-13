@@ -13,12 +13,15 @@ export default async function ({ app, req, store }) {
                 //Get the apollo config
                 const client = app.apolloProvider.clients.protectedRoute;
                 //Request 
-                const result = await client.query({
+                let result = await client.query({
                     query: getUserWithBearer,
                     context: {
                         headers: {
                             authorization: 'Bearer ' + app.$cookiz.get('bearer')
-                        }
+                        },
+                        errorPolicy: "all",
+                        persisting: false,
+                        fetchPolicy: 'network-only',
                     }
                 });
                 //values of the request
@@ -28,9 +31,11 @@ export default async function ({ app, req, store }) {
                 store.commit('setUserName', username);
                 store.commit('setProfilePic', profile_picture);
 
-                console.log(store.state.auth);
+                console.warn(store.state.auth + ' ' + store.state.username);
+
             }catch(err){
                 //Fetch error bearer is not good or we have a server error !
+                console.error(err)
                 store.commit("setAuthState", false);
             }
 

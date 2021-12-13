@@ -110,14 +110,14 @@ const connect = {
     async resolve(parent, args) {
 
         let {email, pw} = args;
-
+        console.log("AAAAAAAAA : " + email);
         let usr = await User.findOne({ where: { email: email } })
         let data = usr.dataValues;
         let clearpw = data.pw;
         let verified = await bcrypt.compare(pw, clearpw);
 
         if (verified) {
-            const token = generateToken(data);
+            const token = await generateToken(data);
             //here we assign the bearer to the user to revoke the tokens on new connection
             data.bearer = token;
             User.update(data, { where: {id: data.id} });

@@ -40,7 +40,7 @@ export default {
     return {
       auth: this.$store.state.auth,
       username: this.$store.state.username,
-      profilepicture: this.$store.state.profilepicture
+      profilepicture: this.$store.state.profilepicture,
     }
   },
   created() {
@@ -48,6 +48,7 @@ export default {
   destroyed() {
   },
   mounted() {
+    console.log(this.username + ' ' + this.$store.state.username);
   },
   methods: {
   }
@@ -134,7 +135,7 @@ export default {
 
   .log-in{
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     text-align: center;
     vertical-align: middle;
     width: 210px;

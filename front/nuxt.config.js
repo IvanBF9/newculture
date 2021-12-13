@@ -30,7 +30,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    {src: '~/plugins/editor.js', mode: 'client'}
+    {src: '~/plugins/editor.js', mode: 'client'},
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -53,8 +53,17 @@ export default {
       },
       protectedRoute: {
         httpEndpoint: "http://localhost:3000/graphqlprotected",
+        persisting: false,
       }
-    }
+    },
+    defaultOptions: {
+      // See 'apollo' definition
+      // For example: default query options
+      $query: {
+        loadingKey: 'loading',
+        fetchPolicy: 'network-only',
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

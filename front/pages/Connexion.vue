@@ -19,13 +19,10 @@
 </template>
 
 <script>
-import {connectUserMutation} from '~/graphql/query'
+import {connectUserMutation, getUserWithBearer} from '~/graphql/query'
 
 export default {
   middleware:["checkState"],
-  layout({ store }){
-    return store.state.layout
-  },
   //Seting the route to use with graphql query
   apollo: {
     //$client: 'protectedRoute',
@@ -48,33 +45,58 @@ export default {
         email: document.querySelector('#email').value,
         pw: document.querySelector('#pw').value,
       }
+      console.log(user);
       this.logIn(user)
-    })
+    });
 
   },
   methods: {
-    logIn ({email, pw}) {
-      this.$apollo.mutate({
+    //Query example
+    /*async applyLog(bearer){
+      try {
+        let result = await this.$apollo.query({
+          query: getUserWithBearer,
+          context: {
+            headers: {
+              authorization: `Bearer ${bearer}`
+            },
+            fetchPolicy: 'no-cache',
+            uri: "http://localhost:3000/graphqlprotected"
+          }
+        })
+        let {username, profile_picture} = result.data.getMyProfile[0];
+        console.log('TESTASTOS ' + username)
+        this.$store.commit('setAuthState', true);
+        this.$store.commit('setUserName', username);
+        console.log("DONE")
+        return this.$store.commit('setProfilePic', profile_picture);
+      } catch (err) {
+        return this.$store.commit('setAuthState', false);
+      }
+    },*/
+    async logIn ({email, pw}) {
+      try{
+      let data = await this.$apollo.mutate({
         mutation: connectUserMutation,
         variables: {
           email,
           pw,
         }
-      })
-      .then(data => {
-        this.$cookiz.set('bearer', data.data.connect.bearer, {
-          path: '/',
-          maxAge: 60 * 60 * 24 * 7
-        })
+      });
+      await this.$apolloHelpers.onLogin(data.data.connect.bearer)
 
-        this.$store.commit("setHeaderKey", (this.$store.state.headerkey + 1));        
-        this.$router.push('/');
-
-        
+      console.log(this.$apolloHelpers.getToken('apollo-token'));
+      this.$cookiz.set('bearer', data.data.connect.bearer, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7,
+        sameSite: 'lax'
       })
-      .catch(err => {
+
+      this.$store.commit("setHeaderKey", (this.$store.state.headerkey + 1));
+      this.$router.push('/'); 
+      }catch(err){ 
         console.log(`Erreur d'auth ! : ${err}`);
-      })
+      }
     },
   }
 }
