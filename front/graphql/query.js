@@ -5,6 +5,8 @@ query{
     getCategoriesArticles{name, id}
 }
 `
+//ARTICLES
+//Create query
 export const createArticleMutation = gql`
 mutation createArticleMutation($title: String!, $description: String!, $content: String!, $categorie_id: Int!){
     createArticle(
@@ -15,6 +17,17 @@ mutation createArticleMutation($title: String!, $description: String!, $content:
         ){
             title
     }
+}
+`
+//Get articles query
+export const getArticles = gql`
+query{
+    getArticles{
+        title,
+        description,
+        content,
+        categorie_id
+      }
 }
 `
 

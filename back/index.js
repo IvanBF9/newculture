@@ -10,8 +10,9 @@ const app = express();
 
 //Light secure 
 app.use(helmet());
-app.use(express.json());
 app.disable('x-powered-by');
+
+app.use(express.json({limit: '10mb'}));
 
 //cors
 const corsOptions = {

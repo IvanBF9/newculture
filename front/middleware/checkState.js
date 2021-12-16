@@ -4,24 +4,25 @@ export default async function ({ app, req, store }) {
 
     //Check user connection
     //Set the basicals values to be shown on header ...
+    const token = app.$apolloHelpers.getToken('apollo-token');
 
     if(store.state.auth == false){
-        if(app.$cookiz.get('bearer') !== undefined){
+        if(token !== undefined){
 
             //Fetch a secure route to see if bearer is ok!
             try{
                 //Get the apollo config
                 const client = app.apolloProvider.clients.protectedRoute;
                 //Request 
-                let result = await client.query({
+                const result = await client.query({
+                    fetchPolicy: "no-cache",
                     query: getUserWithBearer,
                     context: {
                         headers: {
-                            authorization: 'Bearer ' + app.$cookiz.get('bearer')
+                            //authorization: `Bearer ${token}`//app.$cookiz.get('bearer')
                         },
                         errorPolicy: "all",
                         persisting: false,
-                        fetchPolicy: 'network-only',
                     }
                 });
                 //values of the request
@@ -47,7 +48,7 @@ export default async function ({ app, req, store }) {
         }
     }
     if (store.state.auth){
-        if(app.$cookiz.get('bearer') == undefined){
+        if(token == undefined){
             store.commit("setAuthState", false);
         }
     }

@@ -6,6 +6,11 @@ const {
 
 //USERS
 const {getAllUsers, getOneUser, getMyProfile} = require("./methods/Users");
+//Article
+const {
+    getArticles,
+    createArticle
+} = require("./methods/Articles");
 
 /*
  ██▓███   ██▀███   ▒█████  ▄▄▄█████▓▓█████  ▄████▄  ▄▄▄█████▓▓█████ ▓█████▄ 
@@ -30,4 +35,12 @@ const RootQueryProtected = new GraphQLObjectType({
     },
 });
 
-module.exports = new GraphQLSchema({ query: RootQueryProtected});
+const Mutation = new GraphQLObjectType({
+    name: "Mutation",
+    fields: {
+        createArticle: createArticle
+        //Make admin for this routes
+    },
+});
+
+module.exports = new GraphQLSchema({ query: RootQueryProtected, mutation: Mutation});

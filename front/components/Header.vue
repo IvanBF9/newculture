@@ -48,7 +48,7 @@ export default {
   destroyed() {
   },
   mounted() {
-    console.log(this.username + ' ' + this.$store.state.username);
+    console.log(this.username + ' ' + this.$store.state.username + ' ' + this.auth);
   },
   methods: {
   }

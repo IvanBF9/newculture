@@ -2,12 +2,18 @@
 <div class="app">
   <h1 v-if="categorie == undefined" class="title-page">Tous les Articles</h1>
   <h1 v-else class="title-page">Articles {{categorie}}</h1>
+
+  <div class="ql-container ql-snow" v-for="article in getArticles" v-bind:key="article.id">
+    <div class="ql-editor" v-html="JSON.parse(article.content).content">
+      
+    </div>
+  </div>
 </div>
 </template>
 
 <script>
+import {getArticles} from '~/graphql/query'
 export default {
-  middleware: ['redirectIfAuth'],
   layout({ store }){
     return store.state.articlesLayout
   },
@@ -16,8 +22,22 @@ export default {
       categorie: params.categorie
     }
   },
-  /*data({store}) {
-  },*/
+  data() {
+    return {
+      getArticles: []
+    }
+  },
+  apollo:{
+    getArticles:{
+      prefetch: true,
+      variables() {
+        return {
+          categorie_name: this.categorie,
+        }
+      },
+      query: getArticles
+    },
+  },
   created() {
   },
   destroyed() {

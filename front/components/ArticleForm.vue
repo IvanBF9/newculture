@@ -104,6 +104,9 @@ export default {
     createArticle ({title, description, content, categorie_id}) {
       this.$apollo.mutate({
         mutation: createArticleMutation,
+        context: {
+          uri: "http://localhost:3000/graphqlprotected"
+        },
         variables: {
           title,
           description,

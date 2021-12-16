@@ -1,4 +1,5 @@
 const graphql = require("graphql");
+const jwt_decode = require('jwt-decode');
 const {
     GraphQLSchema,
     GraphQLInt,
@@ -8,6 +9,7 @@ const {
 
 //Sequelize models
 const {Article} = require('../../models');
+const {CategorieArticle} = require('../../models');
 //model for graphql
 const {ArticleType} = require("../Types/ArticleType");
 /*
@@ -18,8 +20,36 @@ Publics functions
 
 const getArticles = {
     type: new GraphQLList(ArticleType),
-    resolve(parent, args) {
-        return Article.findAll();
+    args: {
+        categorie_name: { type: GraphQLString },
+    },
+    async resolve(parent, args) {
+        const cateName = args.categorie_name;
+        try{
+            //If no categorie is defined return all
+            if (cateName == "" || cateName == undefined){
+                let articles = await Article.findAll();
+
+                articles.map(article => {
+                    article.content = JSON.stringify(article.content);
+                })
+
+                return articles;
+            }
+            //get categorie id
+            const cate = await CategorieArticle.findOne({where: {name: cateName}});
+            const {id} = cate.dataValues;
+            //return articles for this categorie
+            let articles = await Article.findAll({ where: {categorie_id : id}});
+
+            articles.map(article => {
+                article.content = JSON.stringify(article.content);
+            })
+
+            return articles;
+        }catch(e){
+            console.log(e);
+        }
     }
 }
 /*
@@ -36,16 +66,22 @@ const createArticle = {
         categorie_id: { type: GraphQLInt},
     },
     resolve(parent, args) {
-        let content = args.content;
-        let article = {
-            title: args.title,
-            description: args.description,
-            content: JSON.stringify({pc : content}),
-            categorie_id: args.categorie_id,
-            user_id: 1,
+        try{
+            let {id} = jwt_decode(parent);
+            let content = args.content;
+            let article = {
+                title: args.title,
+                description: args.description,
+                content: {content : content},
+                categorie_id: args.categorie_id,
+                valide: true,//Temporaire
+                user_id: id,
+            }
+            let newArticle = new Article(article);
+            newArticle.save();
+        }catch(err){
+
         }
-        let newArticle = new Article(article);
-        newArticle.save();
     }
 }
 

@@ -1,0 +1,296 @@
+<header>
+<!--NAV PC-->
+    <nav class="header">
+        <div class="header-title">
+            <a >
+            Montres
+                <img width="1.4rem" height="1.4rem" class="logo-header" src="https://www.horlogerie-suisse.com/medias/technique/complications/repetition_minutes/repetcotepont.png" alt="neo culture logo">
+            </a>
+        </div>
+        <ul class="ul-header">
+            <li><a to="/Articles">Articles</a></li>
+            <li><a to="/Evenements">Evénements</a></li>
+            <li><a to="/Lives">Lives</a></li>
+            <li><a to="/Produits">Produits</a></li>
+            <li><a to="/Creation">Création</a></li>
+            <li><a to="/Dons">Dons</a></li>
+        </ul>
+
+        <div style="width:179px" class="computer">
+
+        </div>
+        <button class="hamburger hamburger--slider mobile" type="button">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </button>
+    </nav>
+
+    <!--Mobile-->
+
+<!---
+    <nav class="header-nav">
+        <ul>
+            <li id="drop-articles"><a>Articles</a> <div class="triangle"></div></li>
+            <div class="dropdown-articles">
+                <li><a to="/Articles">Tous</a></li>
+                <li><a>allo</a></li>
+            </div>
+            <li><a to="/Evenements">Evénements</a></li>
+            <li><a to="/Lives">Lives</a></li>
+            <li><a to="/Produits">Produits</a></li>
+            <li><a to="/Creation">Création</a></li>
+            <li><a to="/Dons">Dons</a></li>
+        </ul>
+    </nav>
+-->
+</header>
+
+
+<script>
+
+    //Mobile or pc
+    function selectHeader(){
+        /*let ul = document.querySelector('.ul-header');
+        if (window.innerWidth > 1124){//PC
+            ul.classList.add('ul-flex');
+            ul.classList.remove('ul-block');
+        }else{
+            ul.classList.add('ul-block');
+            ul.classList.remove('ul-flex');
+        }*/
+    }
+
+      //this.removeActiveHeader()
+
+
+    function menuClick(){
+        document.querySelector(".hamburger").classList.toggle("is-active");
+        document.querySelector(".ul-header").classList.toggle("toggled");
+    }
+
+  /**  function dropArticlesCategorie(){
+        document.querySelector(".dropdown-articles").classList.toggle("toggled");
+        document.querySelector('#drop-articles').children[1].classList.toggle("rotate");
+    }*/
+
+    function removeActiveHeader(){
+        if(document.querySelector(".hamburger").classList.contains("is-active")){
+            document.querySelector(".hamburger").classList.remove("is-active");
+            document.querySelector(".ul-header").classList.remove("toggled");
+        }
+    }
+    //Toggle dropdown articles
+   // document.querySelector('#drop-articles').addEventListener("click", dropArticlesCategorie());
+    //Toggle Burger menu
+    document.querySelector(".hamburger").addEventListener("click", menuClick);
+
+    window.addEventListener('resize', selectHeader);
+  
+</script>
+
+<style>
+    /*switch Mobile to pc*/
+
+    @media screen and (max-width: 1124px) {
+        .header{
+            display: block;
+        }
+        .ul-header{
+            display: block;
+            overflow: hidden;
+            max-height: 0px;
+            background: linear-gradient(0deg, rgba(46,42,38,1) 50%, rgba(28,26,25,1) 100%);
+        }
+        .pc{
+            display: none !important;
+        }
+        
+    }
+    @media screen and (min-width: 1124px) {
+        .header{
+            display: flex;
+        }
+        .ul-header{
+            display: flex;
+        }
+        .mobile{
+            display: none !important;
+        }
+        
+    }
+
+
+
+    body{
+        margin: 0;
+        padding: 0;
+    }
+
+    .header-title{
+        display: flex;
+        justify-content: left;
+        height: 65px;
+    }
+
+    .header-title a{
+        font-size: 1.4rem;
+        height: 1.6rem;
+        margin: auto 0 auto 8px;
+    }
+
+    .header-title img{
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+  .header{
+    background: #2e2a26;
+    color: white;
+    justify-content: space-between;
+  }
+
+  /*-------------−−−−A−----------------------*/
+  .ct-hd a {
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: white;
+  }
+  .header ul{
+    padding: 0;
+    margin: 0;
+  }
+
+  .header ul li {
+    width: 100%;
+    display: flex;
+    list-style: none;
+    padding: 8px;
+    align-items: center;
+  }
+
+  .header ul li a {
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    
+    display: inline-block;
+    padding: 15px 20px;
+    position: relative;
+    cursor: pointer;
+  }
+  .header ul li a:after {    
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: white;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+  }
+  .header ul li a:hover:after { 
+    width: 100%; 
+    left: 0; 
+  }
+
+  /*-------------------------------  Header  -------------------------------*/
+  .logo{
+    background-image: url("static/logo.png");
+    width: 1.5rem;
+    height: 100%;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .ul-header{
+    -webkit-transition: max-height 200ms cubic-bezier(0.38, -0.03, 0.74, 1.1);
+    transition: max-height 200ms cubic-bezier(0.38, -0.03, 0.74, 1.1);
+  }
+  /*.ul-header li {
+    width: calc(100% - 24px);
+    cursor: pointer;
+  }*/
+
+  /*------------------------------- Burger Menu -------------------------------*/
+  .hamburger {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    padding: 15px 15px;
+    height: 58px;
+    display: inline-block;
+    cursor: pointer;
+    transition-property: opacity, filter;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+    font: inherit;
+    color: inherit;
+    text-transform: none;
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    overflow: visible;
+  }
+  .hamburger:hover {opacity: 0.7;}
+  .hamburger.is-active:hover {opacity: 0.7; }
+  .hamburger.is-active .hamburger-inner,
+  .hamburger.is-active .hamburger-inner::before,
+  .hamburger.is-active .hamburger-inner::after {
+    background-color: rgb(255, 255, 255);
+  }
+  .hamburger-box {
+    width: 40px;
+    height: 24px;
+    display: inline-block;
+    position: relative;
+  }
+  .hamburger-inner {
+    display: block;
+    top: 50%;
+    margin-top: -2px;
+  }
+  .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    width: 40px;
+    height: 4px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    position: absolute;
+    transition-property: transform;
+    transition-duration: 0.15s;
+    transition-timing-function: ease;
+  }
+  .hamburger-inner::before, .hamburger-inner::after {content: "";display: block;}
+  .hamburger-inner::before {top: -10px;}
+  .hamburger-inner::after {bottom: -10px;}
+  .hamburger--slider .hamburger-inner {top: 2px;}
+  .hamburger--slider .hamburger-inner::before {top: 10px;transition-property: transform, opacity;transition-timing-function: ease;transition-duration: 0.15s;}
+  .hamburger--slider .hamburger-inner::after {top: 20px;}
+  .hamburger--slider.is-active .hamburger-inner {transform: translate3d(0, 10px, 0) rotate(45deg);}
+  .hamburger--slider.is-active .hamburger-inner::before {transform: rotate(-45deg) translate3d(-5.71429px, -6px, 0);opacity: 0;}
+  .hamburger--slider.is-active .hamburger-inner::after {transform: translate3d(0, -20px, 0) rotate(-90deg);}
+  /*mobile*/
+
+  
+  .triangle {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid rgb(255, 255, 255);
+    -webkit-transition: transform 200ms cubic-bezier(1, 0, 1, 0);
+    transition: transform 200ms cubic-bezier(1, 0, 1, 0);
+  }
+  .rotate{
+    transform: rotate(180deg);
+  }
+  .ul-toggle{
+    display: grid;
+  }
+  .toggled{
+    max-height: 2000px;
+  }
+</style>

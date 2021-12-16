@@ -62,7 +62,7 @@ const getMyProfile = {
     async resolve(parent, args) {
 
         try{
-            console.log(jwt_decode(parent));
+            
             let {id} = jwt_decode(parent);
             let usr = await User.findByPk(id);
             usr.profile_picture = usr.profile_picture.toString();

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  middleware: ['checkState'],
+  //middleware: ['checkState'],
   /*data({store}) {
   },*/
   created() {
