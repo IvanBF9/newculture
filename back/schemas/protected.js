@@ -8,6 +8,8 @@ const {
 const {getAllUsers, getOneUser, getMyProfile} = require("./methods/Users");
 //Article
 const {
+    getMyArticles,
+    deleteArticleByUser,
     getArticles,
     createArticle
 } = require("./methods/Articles");
@@ -31,14 +33,16 @@ const RootQueryProtected = new GraphQLObjectType({
     fields: {
         getAllUsers: getAllUsers,
         getOneUser: getOneUser,
-        getMyProfile: getMyProfile
+        getMyProfile: getMyProfile,
+        getMyArticles: getMyArticles,
     },
 });
 
 const Mutation = new GraphQLObjectType({
     name: "Mutation",
     fields: {
-        createArticle: createArticle
+        createArticle: createArticle,
+        deleteArticleByUser:deleteArticleByUser
         //Make admin for this routes
     },
 });

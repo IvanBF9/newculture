@@ -87,7 +87,7 @@ export default {
     //Text editor init
     var quill = new Quill('#editor', editorParams);
 
-    document.querySelector('.btn-first').addEventListener('click', () => {
+    document.querySelector('.btn-first').addEventListener('click', async () => {
       let editor = document.querySelector('#editor');
       let article = {
         title: document.querySelector('#title').value,
@@ -96,13 +96,25 @@ export default {
         categorie_id: parseInt(document.querySelector('#categorie').value)
       }
       console.log(article);
-      this.createArticle(article);
+      try{
+        await this.createArticle(article);
+        this.$router.push(`/MesArticles`);
+      }catch(err){
+        const networkCode = err.networkError.statusCode;
+        if (networkCode == 401){
+          console.log('User not loged in !');
+        }else if (networkCode == 403){
+          console.log('Session expired !');
+        }else{
+          console.log(networkCode);
+        }
+      }
     })
 
   },
   methods: {
     createArticle ({title, description, content, categorie_id}) {
-      this.$apollo.mutate({
+      return this.$apollo.mutate({
         mutation: createArticleMutation,
         context: {
           uri: "http://localhost:3000/graphqlprotected"

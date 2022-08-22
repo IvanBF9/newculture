@@ -97,7 +97,7 @@ export default {
       })
       .then(data => {
           //do thomething here
-          console.log(data)
+          this.$router.push(`/connexion`);
       })
     },
   }

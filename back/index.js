@@ -45,7 +45,17 @@ app.use("/graphqlprotected", authToken,
 
 //Models sequelize & run server
 const db = require('./models');
+
+/*
+const {Article} = require('./models');
+
+Article.findAll({ limit: 10, order: [['updatedAt', 'DESC']]}).then((article) => {
+    article.map(e => {Article.destroy({ where: {id : e.id} });})
+});
+*/
 db.sequelize.sync().then((req) => {
+    
+
     app.listen(Port, () => {
         console.log('➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖');
         console.log('\x1b[36m%s\x1b[0m',`Server listening on http://127.0.0.1:${Port} 🙈`);
@@ -53,3 +63,4 @@ db.sequelize.sync().then((req) => {
         console.log('\x1b[36m%s\x1b[0m', `🕒 ${new Date().getHours()}h${new Date().getMinutes()}`);
     });
 });
+

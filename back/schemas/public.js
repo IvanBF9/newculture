@@ -31,7 +31,8 @@ const {
 //Article
 const {
     getArticles,
-    createArticle
+    createArticle,
+    getArticle
 } = require("./methods/Articles");
 
 const RootQuery = new GraphQLObjectType({
@@ -40,7 +41,8 @@ const RootQuery = new GraphQLObjectType({
         //USERS
         getAllUsers: getAllUsers,
         getCategoriesArticles: getCategoriesArticles,
-        getArticles: getArticles
+        getArticles: getArticles,
+        getArticle: getArticle,
         //Make admin for this routes
     },
 });

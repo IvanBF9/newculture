@@ -10,17 +10,13 @@
       </div>
       <ul>
         <li><NuxtLink to="/Articles">Articles</NuxtLink></li>
-        <li><NuxtLink to="/Evenements">Evénements</NuxtLink></li>
-        <li><NuxtLink to="/Lives">Lives</NuxtLink></li>
+        <li><NuxtLink to="/Users">Utilisateurs</NuxtLink></li>
         <li><NuxtLink to="/Produits">Produits</NuxtLink></li>
-        <li><NuxtLink to="/Creation">Création</NuxtLink></li>
-        <li><NuxtLink to="/Dons">Dons</NuxtLink></li>
       </ul>
       <div v-if="auth" class="ct-hd profile">
         <div class="dropdown">
           <p>{{username}}</p>
         <div class="dropdown-content">
-              <div><NuxtLink to="/MesArticles">Mes Articles</NuxtLink></div>
               <div><NuxtLink to="/Donateurs">Profile</NuxtLink></div>
               <div><NuxtLink to="/deconnexion">Deconnexion</NuxtLink></div>
           </div>

@@ -19,15 +19,49 @@ mutation createArticleMutation($title: String!, $description: String!, $content:
     }
 }
 `
+//deleteArticleByUser
+export const deleteUserArticle = gql`
+mutation deleteUserArticle($id: Int!){
+    deleteArticleByUser(
+            id: $id,
+        )
+}
+`
 //Get articles query
+
 export const getArticles = gql`
-query{
-    getArticles{
+query getArticles($categorie_name : String){
+    getArticles(categorie_name: $categorie_name){
         title,
         description,
         content,
-        categorie_id
+        categorie_id,
+        id
       }
+}
+`
+
+//getMyArticles
+
+export const getMyArticles = gql`
+query {
+    getMyArticles{
+        title,
+        description,
+        content,
+        categorie_id,
+        id
+      }
+}
+`
+
+export const getArticleById = gql`
+query GetArticle($id_article : Int!){
+    getArticle(id_article : $id_article){
+        title,
+        description,
+        content
+    }
 }
 `
 
